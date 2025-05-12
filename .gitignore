@@ -1,0 +1,33 @@
+# Archivos generados por LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.spl
+*.nav
+*.snm
+*.vrb
+
+# Archivos generados por compilación de PDF
+*.pdf
+
+# Archivos de respaldo de editores
+*~
+*.bak
+*.backup
+*.tmp
+
+# Archivos de VS Code
+.vscode/
+*.code-workspace
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
