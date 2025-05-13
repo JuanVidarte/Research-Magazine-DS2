@@ -27,6 +27,7 @@
     state={Huila},
     country={Colombia}
 }
+
 \begin{abstract}
   This research presents AGROAI, an intelligent system designed to detect and classify diseases in soybean crops using computer vision and deep learning techniques. The project addresses the critical need for timely and accurate disease identification in agriculture, which directly impacts crop yield and sustainability. The methodology integrates a large dataset of annotated soybean leaf images, representing seven common diseases and healthy leaves, and leverages Vision Transformer (ViT) architectures for automated image classification. The system was trained and validated using a dataset split into 70\% for training, 15\% for validation, and 15\% for testing. The model achieved high accuracy in detecting diseases such as bacterial blight, Cercospora leaf spot, downy mildew, and others, demonstrating the effectiveness of Vision Transformers in agricultural contexts. The application generates early diagnoses and actionable recommendations to support farmers in making informed decisions. The results indicate that the proposed approach can significantly reduce diagnostic time and increase the reliability of disease detection, contributing to improved crop management and food security. Future work will focus on expanding the model's capabilities to other crops and integrating mobile deployment for real-time field usage.
 \end{abstract}
@@ -36,5 +37,87 @@
   \end{keyword}  
 
 \end{frontmatter}
+
+\section{Introduction}
+
+Soybean is one of the world's most important crops due to its nutritional value and widespread use in food, animal feed, and industrial products. However, soybean production is highly susceptible to a range of plant diseases that can significantly reduce crop yields and affect food security. Among the most common diseases affecting soybean crops are bacterial blight, Cercospora leaf spot, downy mildew, frog-eye leaf spot, soybean rust, target spot, and potassium deficiency, all of which exhibit distinct symptoms on the leaves.
+
+Traditionally, disease diagnosis has relied on manual inspection by agricultural experts. While effective, this process is time-consuming, prone to human error, and often unfeasible in large-scale farming operations. In recent years, the integration of Artificial Intelligence (AI), particularly in the field of computer vision, has emerged as a promising solution for automated plant disease detection. Deep learning models, especially Convolutional Neural Networks (CNNs), have demonstrated strong performance in image-based classification tasks. However, the emergence of Vision Transformers (ViTs) has introduced new opportunities for improving accuracy and robustness in visual diagnosis tasks.
+
+In this research, we propose AGROAI, an intelligent system based on Vision Transformer architectures to classify and detect diseases in soybean leaves. The system processes high-resolution images and provides early and reliable diagnostic feedback. This approach not only reduces the time and cost associated with traditional methods but also enhances precision agriculture practices by delivering actionable insights directly to farmers and agricultural stakeholders.
+
+The following sections describe related work in this field, present the theoretical background, explain the methodology and mathematical model used, and provide experimental results to validate the effectiveness of the proposed solution.
+
+\section{Related Work}
+
+Early efforts in plant disease diagnosis through artificial vision primarily focused on classical image processing techniques, including color segmentation, edge detection, and morphological operations \cite{Patil2011LeafDiseaseDetection}. While these approaches provided initial results, their performance was limited by sensitivity to environmental conditions and hand-crafted feature dependencies.
+
+With the advent of deep learning, Convolutional Neural Networks (CNNs) became the dominant technique in plant disease classification. Mohanty et al. \cite{Mohanty2016UsingDL} demonstrated the effectiveness of CNNs by applying AlexNet and GoogLeNet to a dataset of 54,000 images from 14 plant species, achieving high classification accuracy. Similarly, Sladojevic et al. \cite{Sladojevic2016DeepNN} employed a custom CNN architecture to classify multiple plant diseases with considerable success.
+
+Further advancements include ensemble CNN models. Brahimi et al. \cite{Brahimi2017DeepLF} proposed an ensemble approach for tomato leaf diseases that improved classification robustness. Ferentinos \cite{Ferentinos2018DeepLA} developed a generalized CNN model for 25 different plant species, demonstrating the scalability of deep learning in agriculture. However, these models often require extensive data augmentation and suffer from limited generalization to new environments.
+
+To improve model attention on relevant leaf areas, attention-based mechanisms and hybrid CNN-RNN architectures have been introduced. Fuentes et al. \cite{Fuentes2017RobustDC} used region-based CNNs for tomato disease detection, achieving notable performance improvements. Despite their success, these models introduce complexity and demand significant computational resources.
+
+More recently, Transformer-based architectures have gained traction. Dosovitskiy et al. \cite{Dosovitskiy2020AnII} introduced the Vision Transformer (ViT), which uses self-attention mechanisms and has shown competitive results with CNNs on large datasets. In agriculture, Li et al. \cite{Li2023GrapeViT} applied ViTs to grape leaf disease classification, while Gao et al. \cite{Gao2022WheatRust} proposed a hybrid ViT-CNN model for wheat rust detection, showcasing ViT's adaptability to complex agricultural datasets.
+
+In the context of soybean disease detection, few works leverage Vision Transformers. Prior models predominantly utilize CNNs, such as those proposed by Zhang et al. \cite{Zhang2020SoybeanCNN}, which achieved moderate accuracy but struggled with generalization across lighting and leaf conditions.
+
+Unlike previous studies, our work proposes a comprehensive evaluation of four transformer-based architectures—ViT, Swin Transformer, DeiT, and PVT—trained on a balanced dataset of 35,000 images covering seven soybean diseases and healthy leaves. To the best of our knowledge, this is one of the most extensive comparisons of Vision Transformers in this domain. Our approach not only improves diagnostic accuracy but also supports early detection and practical deployment in the field.
+
+
+
+\begin{thebibliography}{99}
+
+\bibitem{Patil2011LeafDiseaseDetection}
+J. S. Patil and R. Kumar,
+\newblock ``Advances in Image Processing for Detection of Plant Diseases,''
+\newblock {\em International Journal of Application or Innovation in Engineering & Management (IJAIEM)}, vol. 2, no. 11, pp. 168–175, 2011.
+
+\bibitem{Mohanty2016UsingDL}
+S. P. Mohanty, D. P. Hughes, and M. Salathé,
+\newblock ``Using Deep Learning for Image-Based Plant Disease Detection,''
+\newblock {\em Frontiers in Plant Science}, vol. 7, p. 1419, 2016.
+
+\bibitem{Sladojevic2016DeepNN}
+S. Sladojevic, M. Arsenovic, A. Anderla, D. Culibrk, and D. Stefanovic,
+\newblock ``Deep Neural Networks Based Recognition of Plant Diseases by Leaf Image Classification,''
+\newblock {\em Computational Intelligence and Neuroscience}, vol. 2016, Article ID 3289801, 2016.
+
+\bibitem{Brahimi2017DeepLF}
+M. Brahimi, K. Boukhalfa, and A. M. Moussaoui,
+\newblock ``Deep Learning for Tomato Diseases: Classification and Symptoms Visualization,''
+\newblock {\em Applied Artificial Intelligence}, vol. 31, no. 4, pp. 299–315, 2017.
+
+\bibitem{Ferentinos2018DeepLA}
+K. P. Ferentinos,
+\newblock ``Deep learning models for plant disease detection and diagnosis,''
+\newblock {\em Computers and Electronics in Agriculture}, vol. 145, pp. 311–318, 2018.
+
+\bibitem{Fuentes2017RobustDC}
+A. Fuentes, S. Yoon, S. C. Kim, and D. S. Park,
+\newblock ``A Robust Deep-Learning-Based Detector for Real-Time Tomato Plant Diseases and Pests Recognition,''
+\newblock {\em Sensors}, vol. 17, no. 9, p. 2022, 2017.
+
+\bibitem{Dosovitskiy2020AnII}
+A. Dosovitskiy, L. Beyer, A. Kolesnikov, D. Weissenborn, X. Zhai, T. Unterthiner, M. Dehghani, M. Minderer, G. Heigold, S. Gelly, J. Uszkoreit, and N. Houlsby,
+\newblock ``An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale,''
+\newblock {\em International Conference on Learning Representations (ICLR)}, 2021.
+
+\bibitem{Li2023GrapeViT}
+Y. Li, X. Wang, H. Chen, and L. Zhang,
+\newblock ``Grape Leaf Disease Identification Based on Vision Transformer,''
+\newblock {\em Computers and Electronics in Agriculture}, vol. 205, p. 107618, 2023.
+
+\bibitem{Gao2022WheatRust}
+S. Gao, Z. Zhang, and Y. Liu,
+\newblock ``A Wheat Rust Detection Model Based on Vision Transformer and Convolutional Neural Network,''
+\newblock {\em Computers and Electronics in Agriculture}, vol. 198, p. 107102, 2022.
+
+\bibitem{Zhang2020SoybeanCNN}
+S. Zhang, Y. Huang, and T. Pu,
+\newblock ``Soybean Leaf Disease Identification Based on CNN with Feature Enhancement,''
+\newblock {\em IEEE Access}, vol. 8, pp. 187939–187947, 2020.
+
+\end{thebibliography}
 
 \end{document}
