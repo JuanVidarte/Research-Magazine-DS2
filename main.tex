@@ -64,6 +64,36 @@ In the context of soybean disease detection, few works leverage Vision Transform
 
 Unlike previous studies, our work proposes a comprehensive evaluation of four transformer-based architectures—ViT, Swin Transformer, DeiT, and PVT—trained on a balanced dataset of 35,000 images covering seven soybean diseases and healthy leaves. To the best of our knowledge, this is one of the most extensive comparisons of Vision Transformers in this domain. Our approach not only improves diagnostic accuracy but also supports early detection and practical deployment in the field.
 
+\section{Theoretical Framework}
+
+This section provides a conceptual foundation for understanding the main components involved in the design and development of AGROAI, including soybean crop pathology, artificial vision, deep learning, neural networks, and Vision Transformer architectures.
+
+\subsection{Soybean Crop and Leaf Diseases}
+
+Soybean (\textit{Glycine max}) is a vital crop in global agriculture, widely cultivated for its protein and oil content. However, soybean leaves are susceptible to numerous diseases that compromise yield and quality. Among the most common are bacterial blight, Cercospora leaf spot, downy mildew, frog-eye leaf spot, soybean rust, target spot, and potassium deficiency. These diseases manifest through visual symptoms such as discoloration, lesions, spots, and deformation, making them suitable candidates for image-based classification systems \cite{Ferentinos2018DeepLA}.
+
+\subsection{Artificial Vision in Agriculture}
+
+Artificial vision, also known as computer vision, refers to the use of image processing and pattern recognition to extract meaningful information from visual data. In agriculture, this technology has been adopted to automate inspection tasks such as plant growth monitoring, fruit grading, and disease detection \cite{Mohanty2016UsingDL}. The typical pipeline involves image acquisition, preprocessing, feature extraction, and classification. With the advent of machine learning, manual feature engineering has increasingly been replaced by automatic representation learning through deep models.
+
+\subsection{Deep Learning and Neural Networks}
+
+Deep learning is a subset of machine learning that uses layered architectures—primarily neural networks—to learn hierarchical representations from data. The most commonly used deep learning models for image analysis are Convolutional Neural Networks (CNNs), which exploit spatial locality and parameter sharing to efficiently extract features from images \cite{Sladojevic2016DeepNN}. CNNs are composed of convolutional layers, pooling layers, and fully connected layers. These models have been extensively applied to plant disease detection due to their robustness and high accuracy \cite{Ferentinos2018DeepLA,Brahimi2017DeepLF}.
+
+\subsection{Vision Transformers (ViT)}
+
+Transformers, originally introduced for natural language processing, have been adapted to vision tasks through the Vision Transformer (ViT) architecture \cite{Dosovitskiy2020AnII}. Unlike CNNs, ViTs divide input images into fixed-size patches and treat each patch as a token in a sequence. These tokens are embedded and processed using multi-head self-attention mechanisms, allowing the model to capture global context across the image.
+
+ViTs have shown comparable or superior performance to CNNs when trained on large datasets. Their hierarchical variants, such as the Swin Transformer \cite{Liu2021SwinTH}, and lightweight versions like DeiT \cite{Touvron2021TrainingDI}, offer improvements in efficiency and scalability. The Pyramid Vision Transformer (PVT) further incorporates spatial hierarchies to enhance dense prediction tasks such as object detection and segmentation \cite{Wang2021PyramidVT}. These models are particularly effective in agricultural settings where fine-grained visual details are essential for accurate diagnosis \cite{Li2023GrapeViT,Gao2022WheatRust}.
+
+\subsection{Data Augmentation and Model Generalization}
+
+To improve model generalization and reduce overfitting, data augmentation techniques are commonly used. These include random rotations, flips, brightness adjustments, and noise injection. Such transformations simulate variability found in real-world agricultural images, enabling the model to learn more robust features. Additionally, transfer learning and fine-tuning on pre-trained transformer models further enhance performance when dealing with limited or domain-specific datasets \cite{Touvron2021TrainingDI}.
+
+\subsection{Evaluation Metrics in Classification Tasks}
+
+In the context of disease classification, standard evaluation metrics include accuracy, precision, recall, and F1-score. These metrics provide insights into the model’s ability to correctly identify disease categories and minimize false positives or negatives. Confusion matrices are also widely used to visualize performance across multiple classes. These metrics are essential in agricultural applications where misdiagnosis can lead to economic losses or ineffective treatments \cite{Ferentinos2018DeepLA}.
+
 
 
 \begin{thebibliography}{99}
@@ -117,6 +147,51 @@ S. Gao, Z. Zhang, and Y. Liu,
 S. Zhang, Y. Huang, and T. Pu,
 \newblock ``Soybean Leaf Disease Identification Based on CNN with Feature Enhancement,''
 \newblock {\em IEEE Access}, vol. 8, pp. 187939–187947, 2020.
+
+\bibitem{Patil2011LeafDiseaseDetection}
+J. Patil and R. Kumar,
+\newblock ``Advances in Image Processing for Detection of Plant Diseases,''
+\newblock {\em Journal of Advanced Bioinformatics Applications and Research}, vol. 2, no. 2, pp. 135--141, 2011.
+
+\bibitem{Brahimi2017DeepLF}
+M. Brahimi, K. Boukhalfa, and A. Msaaf,
+\newblock ``Deep Learning for Tomato Diseases: Classification and Symptoms Visualization,''
+\newblock {\em Applied Artificial Intelligence}, vol. 31, no. 4, pp. 299--315, 2017.
+
+\bibitem{Ferentinos2018DeepLA}
+K. P. Ferentinos,
+\newblock ``Deep Learning Models for Plant Disease Detection and Diagnosis,''
+\newblock {\em Computers and Electronics in Agriculture}, vol. 145, pp. 311--318, 2018.
+
+\bibitem{Fuentes2017RobustDC}
+A. Fuentes, S. Yoon, S. C. Kim, and D. S. Park,
+\newblock ``A Robust Deep-Learning-Based Detector for Real-Time Tomato Plant Diseases and Pests Recognition,''
+\newblock {\em Sensors}, vol. 17, no. 9, p. 2022, 2017.
+
+\bibitem{Li2023GrapeViT}
+L. Li, H. Yu, Y. Zhang, and Q. Li,
+\newblock ``Grape Leaf Disease Identification Based on Improved Vision Transformer,''
+\newblock {\em Computers and Electronics in Agriculture}, vol. 208, p. 107820, 2023.
+
+\bibitem{Gao2022WheatRust}
+Z. Gao, X. Liu, Y. Zhang, and H. Li,
+\newblock ``Wheat Leaf Rust Detection Based on Hybrid CNN and Vision Transformer Model,''
+\newblock {\em Plant Methods}, vol. 18, no. 1, pp. 1--12, 2022.
+
+\bibitem{Liu2021SwinTH}
+Z. Liu, Y. Lin, Y. Cao, H. Hu, Y. Wei, Z. Zhang, S. Lin, and B. Guo,
+\newblock ``Swin Transformer: Hierarchical Vision Transformer using Shifted Windows,''
+\newblock {\em Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)}, pp. 10012--10022, 2021.
+
+\bibitem{Touvron2021TrainingDI}
+H. Touvron, M. Cord, M. Douze, F. Massa, A. Sablayrolles, and H. Jégou,
+\newblock ``Training Data-efficient Image Transformers & Distillation through Attention,''
+\newblock {\em Proceedings of the 38th International Conference on Machine Learning (ICML)}, pp. 10347--10357, 2021.
+
+\bibitem{Wang2021PyramidVT}
+W. Wang, E. Xie, X. Li, D. Fan, K. Song, D. Liang, T. Lu, P. Luo, and L. Shao,
+\newblock ``Pyramid Vision Transformer: A Versatile Backbone for Dense Prediction without Convolutions,''
+\newblock {\em Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)}, pp. 568--578, 2021.
 
 \end{thebibliography}
 
