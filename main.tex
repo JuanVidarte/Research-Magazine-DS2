@@ -94,6 +94,94 @@ To improve model generalization and reduce overfitting, data augmentation techni
 
 In the context of disease classification, standard evaluation metrics include accuracy, precision, recall, and F1-score. These metrics provide insights into the model’s ability to correctly identify disease categories and minimize false positives or negatives. Confusion matrices are also widely used to visualize performance across multiple classes. These metrics are essential in agricultural applications where misdiagnosis can lead to economic losses or ineffective treatments \cite{Ferentinos2018DeepLA}.
 
+\section{Methodology}
+
+This research followed a structured pipeline comprising three main phases: dataset construction, data preprocessing, and model implementation using advanced deep learning architectures based on Vision Transformers.
+
+\subsection{Dataset Construction}
+
+The dataset includes 35,000 images of soybean leaves across eight categories: seven disease types (bacterial blight, Cercospora leaf spot, downy mildew, frog-eye leaf spot, soybean rust, target spot, potassium deficiency) and healthy leaves. Data were collected from public repositories such as Mendeley Data, Zenodo, and Kaggle, based on criteria like image resolution (400x400 pixels), recent acquisition (5 years), clear labeling, and diversity of capture conditions.
+
+Images were manually validated and organized into eight folders, each representing a specific class. The dataset was evenly balanced with 4,375 images per class to ensure robust learning during training.
+
+\subsection{Preprocessing and Data Augmentation}
+
+\textbf{1. Initial Review and Cleaning:}
+\begin{itemize}
+  \item Corrupted and unreadable images were detected and removed.
+  \item Duplicate images were identified via MD5 hashing and eliminated.
+  \item Images were renamed using class labels and numerical suffixes.
+\end{itemize}
+
+\textbf{2. Standardization and Normalization:}
+\begin{itemize}
+  \item All images were converted to JPEG format in RGB color space.
+  \item Each image was resized to 224$\times$224 pixels to match the input size required by Vision Transformer models.
+\end{itemize}
+
+\textbf{3. Data Augmentation:} To improve generalization and increase model robustness, the following transformations were applied:
+\begin{itemize}
+  \item Random rotations (±20 degrees)
+  \item Scaling and zooming
+  \item Blur adjustments
+  \item Horizontal and vertical flipping
+\end{itemize}
+These augmentations simulate field conditions and increase the diversity of the training data without the need for additional manual labeling. The selection of augmentation strategies was based on recommendations found in comprehensive augmentation studies \cite{Shorten2019Survey,Buslaev2020Albumentations}.
+
+These augmentations were applied using Python libraries such as \texttt{Augmentor} and \texttt{OpenCV}.
+
+\subsection{Dataset Splitting}
+
+The preprocessed dataset was divided into three subsets:
+\begin{itemize}
+  \item 70\% for training
+  \item 15\% for validation
+  \item 15\% for testing
+\end{itemize}
+
+The split ensured that all classes were proportionally represented in each subset.
+
+\subsection{Model Selection and Architecture}
+
+Four Transformer-based models were implemented:
+\begin{enumerate}
+  \item \textbf{ViT (Vision Transformer)} – for learning global relationships in the image \cite{Dosovitskiy2020AnII}.
+  \item \textbf{DeiT} – optimized for training with fewer samples using knowledge distillation \cite{Touvron2021TrainingDI}.
+  \item \textbf{Swin Transformer} – includes shifted windows for hierarchical processing and local context \cite{Liu2021SwinTH}.
+  \item \textbf{PVT (Pyramid Vision Transformer)} – combines spatial pyramid representations with transformer blocks for efficient feature extraction \cite{Wang2021PyramidVT}.
+\end{enumerate}
+
+
+Although lightweight convolutional models such as MobileNetV3 \cite{Howard2020MobileNetV3} and EfficientNetV2 \cite{Tan2021Efficientnetv2} have proven effective for resource-constrained environments, their ability to capture long-range dependencies is limited. In contrast, Vision Transformers are better suited for high-resolution agricultural tasks requiring global attention and fine-grained detail extraction.
+
+All models were initialized with ImageNet pre-trained weights and fine-tuned on the soybean dataset using transfer learning.
+
+\subsection{Training Configuration}
+
+Training was conducted using the PyTorch framework \cite{Paszke2019PyTorch}, which provides dynamic computational graphs and CUDA acceleration for efficient deep learning model development.
+
+\begin{itemize}
+  \item \textbf{Framework:} PyTorch (v2.0), using CUDA acceleration with NVIDIA RTX 4060 GPU.
+  \item \textbf{Loss Function:} Cross-entropy loss.
+  \item \textbf{Optimizer:} AdamW with weight decay.
+  \item \textbf{Learning Rate:} $1 \times 10^{-4}$, adjusted using cosine annealing.
+  \item \textbf{Epochs:} 15, 25 and 35 (models saved every 5 epochs).
+  \item \textbf{Batch Size:} 4 and 16.
+  \item \textbf{Evaluation:} Conducted using accuracy, precision, recall, F1-score, and confusion matrix.
+\end{itemize}
+
+\subsection{Evaluation Metrics}
+
+Each model was evaluated on the unseen test set, using:
+\begin{itemize}
+  \item \textbf{Accuracy} – Overall classification performance.
+  \item \textbf{Precision and Recall} – For class-wise analysis.
+  \item \textbf{F1-score} – Harmonic mean of precision and recall.
+  \item \textbf{Confusion Matrix} – Visual representation of class-wise predictions.
+\end{itemize}
+
+This pipeline ensured a rigorous and replicable approach for evaluating the performance of Vision Transformers on soybean leaf disease detection.
+
 
 
 \begin{thebibliography}{99}
@@ -192,6 +280,31 @@ H. Touvron, M. Cord, M. Douze, F. Massa, A. Sablayrolles, and H. Jégou,
 W. Wang, E. Xie, X. Li, D. Fan, K. Song, D. Liang, T. Lu, P. Luo, and L. Shao,
 \newblock ``Pyramid Vision Transformer: A Versatile Backbone for Dense Prediction without Convolutions,''
 \newblock {\em Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)}, pp. 568--578, 2021.
+
+\bibitem{Shorten2019Survey}
+C. Shorten and T. M. Khoshgoftaar,
+``A survey on Image Data Augmentation for Deep Learning,''
+\emph{Journal of Big Data}, vol. 6, no. 1, pp. 1–48, 2019.
+
+\bibitem{Tan2021Efficientnetv2}
+M. Tan and Q. V. Le,
+``EfficientNetV2: Smaller Models and Faster Training,''
+in \emph{Proc. of ICML}, 2021.
+
+\bibitem{Howard2020MobileNetV3}
+A. Howard et al.,
+``Searching for MobileNetV3,''
+in \emph{Proc. of CVPR}, 2020.
+
+\bibitem{Buslaev2020Albumentations}
+A. Buslaev et al.,
+``Albumentations: Fast and Flexible Image Augmentations,''
+\emph{Information}, vol. 11, no. 2, p. 125, 2020.
+
+\bibitem{Paszke2019PyTorch}
+A. Paszke et al.,
+``PyTorch: An Imperative Style, High-Performance Deep Learning Library,''
+in \emph{Advances in Neural Information Processing Systems}, vol. 32, 2019.
 
 \end{thebibliography}
 
