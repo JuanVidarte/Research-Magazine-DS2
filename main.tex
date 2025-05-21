@@ -1,4 +1,5 @@
 \documentclass[preprint,12pt]{elsarticle}
+\usepackage{graphicx}
 
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -386,6 +387,7 @@ Table~\ref{tab:performance} summarizes the classification results for each model
 \centering
 \caption{Performance comparison of Vision Transformer models}
 \label{tab:performance}
+\resizebox{0.9\textwidth}{!}{%
 \begin{tabular}{lcccc}
 \hline
 \textbf{Model} & \textbf{Accuracy (\%)} & \textbf{Precision (\%)} & \textbf{Recall (\%)} & \textbf{F1-score (\%)} \\
@@ -395,8 +397,10 @@ Swin Transformer & 91.5 & 91.0 & 90.8 & 90.9 \\
 DeiT             & 89.8 & 88.9 & 89.1 & 89.0 \\
 PVT              & 88.3 & 87.5 & 87.8 & 87.6 \\
 \hline
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
+
 
 \subsection{Analysis and Discussion}
 
