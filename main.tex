@@ -1,9 +1,11 @@
 \documentclass[preprint,12pt]{elsarticle}
-\usepackage{graphicx}
 
+\usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{float} % For [H] float placement
+\usepackage{setspace}
+
 
 \journal{Artificial Vision Journal}
 
@@ -420,6 +422,30 @@ The superior performance of ViT suggests that it is the most appropriate archite
 
 Future iterations may combine ViT with spatial attention modules or integrate multispectral data to further improve diagnostic precision in real-world agricultural scenarios.
 
+\section{Conclusions and Future Work}
+
+This study introduced AGROAI, a novel artificial vision system powered by Vision Transformers for the diagnosis of soybean leaf diseases. Among the four evaluated models—ViT, Swin Transformer, DeiT, and PVT—ViT showed superior performance in accuracy, precision, and F1-score, validating its suitability for high-resolution agricultural diagnostics.
+
+The proposed pipeline demonstrated the effectiveness of integrating deep learning with transformer architectures for real-time, image-based plant disease classification. By focusing on preprocessing quality, balanced data distribution, and model fine-tuning, AGROAI achieved robust and generalizable results, with the potential to assist farmers in early intervention and reduce economic losses.
+
+\subsection{Future Work}
+
+Future improvements include:
+
+\begin{itemize}
+  \item Expanding the system to cover additional crops and disease types beyond soybean.
+  \item Integrating multispectral or hyperspectral imaging data to improve diagnostic sensitivity.
+  \item Deploying the model on mobile or edge devices for in-field, real-time usage with minimal computational cost.
+  \item Exploring hybrid transformer-CNN architectures to balance performance and efficiency.
+\end{itemize}
+
+These developments will further advance the utility of AGROAI in supporting sustainable and intelligent agriculture across diverse environments.
+
+\begingroup
+\footnotesize
+\setstretch{0.9}  % Puedes bajar más si es necesario
+\bibliographystyle{elsarticle-num}
+\bibliography{bibliography}
 \begin{thebibliography}{99}
 
 \bibitem{Patil2011LeafDiseaseDetection}
@@ -543,5 +569,6 @@ A. Paszke et al.,
 in \emph{Advances in Neural Information Processing Systems}, vol. 32, 2019.
 
 \end{thebibliography}
+\endgroup
 
 \end{document}
